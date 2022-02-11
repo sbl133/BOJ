@@ -4,13 +4,11 @@
 #include<deque>
 using namespace std;
 
-deque<string> split(string str, char Delimiter) {
+deque<string> split(string& str, char Delimiter) {
+
 	str = str.substr(1, str.size() - 2);
 
 	deque<string> result;
-	
-	//if (str.empty())
-		//return result;
 	
 	istringstream iss(str);
 	string buffer;
@@ -19,7 +17,7 @@ deque<string> split(string str, char Delimiter) {
 	}
 	return result;
 }
-void exeFunc(deque<string>& v, string &funcStr) {
+void exeFunc(deque<string>& v, string& funcStr) {
 	int rNum = 0;
 	for (int i = 0; i < funcStr.size(); i++) {
 		if (funcStr[i] == 'D') {
@@ -52,17 +50,19 @@ int main() {
 		deque<string> vStr = split(numArr, ',');
 		exeFunc(vStr, funcStr);
 		cout << "[";
-		if (rNum % 2 == 0) {
-			for (int i = 0; i < vStr.size() - 1; i++)
-				cout << vStr[i] << ",";
-			if (!vStr.empty())
-				cout << vStr[vStr.size() - 1];
-		}
-		else {
-			for (int i = vStr.size() - 1; i > 0; i--)
-				cout << vStr[i] << ",";
-			if (!vStr.empty())
-				cout << vStr[0];
+		if (!vStr.empty()) {
+			if (rNum % 2 == 0) {
+				for (int i = 0; i < vStr.size() - 1; i++)
+					cout << vStr[i] << ",";
+				if (!vStr.empty())
+					cout << vStr[vStr.size() - 1];
+			}
+			else {
+				for (int i = vStr.size() - 1; i > 0; i--)
+					cout << vStr[i] << ",";
+				if (!vStr.empty())
+					cout << vStr[0];
+			}
 		}
 		cout << "]" << endl;
 	}
